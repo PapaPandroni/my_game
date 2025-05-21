@@ -1,5 +1,7 @@
 import pygame
 import os
+from player import Player
+from enemy import *
 
 pygame.init()
 
@@ -9,7 +11,8 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
 background = pygame.transform.scale(pygame.image.load(os.path.join("assets", "orig_big.png")).convert(), (WIDTH, HEIGHT))
-
+player = Player()
+enemy = Enemy()
 
 running = True
 while running:
@@ -19,7 +22,8 @@ while running:
             running = False
         
     screen.blit(background)
-
+    player.draw(screen)
+    enemy.draw(screen)    
 
     #GAME
 
@@ -29,3 +33,5 @@ while running:
     clock.tick(60)
 
 pygame.quit()
+
+
