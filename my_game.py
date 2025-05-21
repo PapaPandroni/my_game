@@ -2,15 +2,16 @@ import pygame
 import os
 from player import Player
 from enemy import *
+from constants import *
 
 pygame.init()
 
-WIDTH, HEIGHT = 1280, 720
 
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+
+
 clock = pygame.time.Clock()
 
-background = pygame.transform.scale(pygame.image.load(os.path.join("assets", "orig_big.png")).convert(), (WIDTH, HEIGHT))
+background = pygame.transform.scale(pygame.image.load(os.path.join("assets", "orig_big.png")).convert(), (SCREEN_WIDTH, SCREEN_HEIGHT))
 player = Player()
 enemy = Enemy()
 
@@ -21,9 +22,10 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         
-    screen.blit(background)
-    player.draw(screen)
-    enemy.draw(screen)    
+    SCREEN.blit(background)
+    player.draw(SCREEN)
+    enemy.draw(SCREEN)
+    player.update()    
 
     #GAME
 

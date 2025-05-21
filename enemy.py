@@ -6,7 +6,6 @@ path_to_enemies = os.path.join("assets", "enemies")
 
 enemies = [enemy for enemy in os.listdir(path_to_enemies)]
 
-print(enemies)
 
 class Enemy():
     def __init__(self):
