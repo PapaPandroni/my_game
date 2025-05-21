@@ -1,20 +1,24 @@
 import pygame
+import os
 
 pygame.init()
 
-screen = pygame.display.set_mode((1280, 720))
+WIDTH, HEIGHT = 1280, 720
 
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
-running = True
+background = pygame.transform.scale(pygame.image.load(os.path.join("assets", "orig_big.png")).convert(), (WIDTH, HEIGHT))
 
+
+running = True
 while running:
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         
-    screen.fill("purple")
+    screen.blit(background)
 
 
     #GAME
