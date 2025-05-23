@@ -1,6 +1,7 @@
 import pygame
 import os
 from constants import *
+import time
 
 
 class Player():

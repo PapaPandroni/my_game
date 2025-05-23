@@ -25,6 +25,7 @@ while running:
     SCREEN.blit(background)
     player.draw(SCREEN)
     enemy.draw(SCREEN)
+    enemy.movement()
     player.update()    
 
     #GAME
