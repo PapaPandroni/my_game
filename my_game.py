@@ -1,7 +1,7 @@
 import pygame
 import os
 from player import Player
-from enemy import *
+from enemy import Enemy
 from constants import *
 
 pygame.init()
@@ -25,7 +25,7 @@ while running:
     SCREEN.blit(background)
     player.draw(SCREEN)
     enemy.draw(SCREEN)
-    enemy.movement()
+    enemy.update()
     player.update()    
 
     #GAME

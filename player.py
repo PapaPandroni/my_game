@@ -25,6 +25,7 @@ class Player():
     def shoot(self):
         self.laser = pygame.image.load(os.path.join("assets", "Charge_2.png"))
         self.laser_frect = self.laser.get_frect(midbottom = (self.frect.centerx, self.frect.top))
+        
         SCREEN.blit(self.laser, self.laser_frect)
 
 
