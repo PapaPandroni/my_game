@@ -4,21 +4,23 @@ from constants import *
 import time
 
 
+
 class Player():
     def __init__(self):
         self.sprite = pygame.transform.rotate(pygame.image.load(os.path.join("assets", "Idle.png")).convert_alpha(), 90)
         self.frect = self.sprite.get_frect(midbottom=(SCREEN_WIDTH/2, SCREEN_HEIGHT))
+        
     
-    def update(self):
+    def update(self, dt):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP] and self.frect.top > 0:
-            self.frect.y -= 6
+            self.frect.y -= PLAYER_SPEED * dt
         if keys[pygame.K_DOWN] and self.frect.bottom < SCREEN_HEIGHT:
-            self.frect.y += 6
+            self.frect.y += PLAYER_SPEED * dt
         if keys[pygame.K_LEFT] and self.frect.left > 0:
-            self.frect.x -= 6
+            self.frect.x -= PLAYER_SPEED  * dt
         if keys[pygame.K_RIGHT] and self.frect.right < SCREEN_WIDTH:
-            self.frect.x += 6
+            self.frect.x += PLAYER_SPEED * dt
         if keys[pygame.K_SPACE]:
             self.shoot()
 

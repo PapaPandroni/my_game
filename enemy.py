@@ -20,17 +20,17 @@ class Enemy():
         surface.blit(self.sprite, self.frect)
         
     
-    def update(self):
+    def update(self, dt):
         
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship1.png"):
-            self.frect.y += 5
+            self.frect.y += ENEMY_SPEED * dt * 1
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship2.png"):
-            self.frect.y += 1
+            self.frect.y += ENEMY_SPEED * dt * 2
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship3.png"):
-            self.frect.y += 4
+            self.frect.y += ENEMY_SPEED * dt * 1.5
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship4.png"):
-            self.frect.y += 3
+            self.frect.y += ENEMY_SPEED * dt * 2.5
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship5.png"):
-            self.frect.y += 2
+            self.frect.y += ENEMY_SPEED * dt * 5
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship6.png"):
-            self.frect.y += 2.5
+            self.frect.y += ENEMY_SPEED * dt * 1.75

@@ -18,6 +18,8 @@ enemy = Enemy()
 running = True
 while running:
     
+    dt = clock.tick() / 1000 
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -25,15 +27,15 @@ while running:
     SCREEN.blit(background)
     player.draw(SCREEN)
     enemy.draw(SCREEN)
-    enemy.update()
-    player.update()    
+    enemy.update(dt)
+    player.update(dt)    
 
     #GAME
 
 
     pygame.display.flip()
 
-    clock.tick(60)
+    
 
 pygame.quit()
 
