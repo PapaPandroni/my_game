@@ -6,13 +6,12 @@ from constants import *
 
 pygame.init()
 
-
-
-
 clock = pygame.time.Clock()
 
+all_sprites = pygame.sprite.Group()
+
 background = pygame.transform.scale(pygame.image.load(os.path.join("assets", "orig_big.png")).convert(), (SCREEN_WIDTH, SCREEN_HEIGHT))
-player = Player()
+player = Player(all_sprites)
 enemy = Enemy()
 
 running = True
@@ -23,12 +22,15 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+
+    all_sprites.update(dt)
         
     SCREEN.blit(background)
-    player.draw(SCREEN)
+    all_sprites.draw(SCREEN)
     enemy.draw(SCREEN)
     enemy.update(dt)
-    player.update(dt)    
+      
 
     #GAME
 
