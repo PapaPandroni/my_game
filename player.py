@@ -8,7 +8,7 @@ import time
 class Player(pygame.sprite.Sprite):
     def __init__(self, groups):
         super().__init__(groups)
-        self.image = pygame.transform.rotate(pygame.image.load(os.path.join("assets", "Idle.png")).convert_alpha(), 90)
+        self.image = pygame.image.load(os.path.join("assets", "Idle.png")).convert_alpha()
         self.rect = self.image.get_frect(midbottom=(SCREEN_WIDTH/2, SCREEN_HEIGHT))
         self.pos = pygame.math.Vector2(self.rect.x, self.rect.y)
         self.direction = pygame.math.Vector2(0,0)
