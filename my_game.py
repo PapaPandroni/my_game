@@ -3,6 +3,7 @@ import os
 from player import Player
 from enemy import Enemy
 from constants import *
+from laser import Laser
 
 pygame.init()
 
@@ -11,6 +12,7 @@ clock = pygame.time.Clock()
 all_sprites = pygame.sprite.Group()
 
 background = pygame.transform.scale(pygame.image.load(os.path.join("assets", "orig_big.png")).convert(), (SCREEN_WIDTH, SCREEN_HEIGHT))
+
 player = Player(all_sprites)
 enemy = Enemy()
 
