@@ -9,12 +9,14 @@ pygame.init()
 
 clock = pygame.time.Clock()
 
-all_sprites = pygame.sprite.Group()
-
 background = pygame.transform.scale(pygame.image.load(os.path.join("assets", "orig_big.png")).convert(), (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-player = Player(all_sprites)
-enemy = Enemy()
+player = Player(ALL_SPRITES)
+
+
+#enemey spawn event
+enemy_spawn = pygame.event.custom_type()
+pygame.time.set_timer(enemy_spawn, 500)
 
 running = True
 while running:
@@ -24,14 +26,16 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        if event.type == enemy_spawn:
+            enemy = Enemy(ALL_SPRITES)
 
 
-    all_sprites.update(dt)
+
+    ALL_SPRITES.update(dt)
         
     SCREEN.blit(background)
-    all_sprites.draw(SCREEN)
-    enemy.draw(SCREEN)
-    enemy.update(dt)
+    ALL_SPRITES.draw(SCREEN)
+
       
 
     #GAME

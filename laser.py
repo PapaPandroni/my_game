@@ -3,11 +3,12 @@ from constants import LASER
 
 
 class Laser(pygame.sprite.Sprite):
-    def __init__(self, groups, player):
+    def __init__(self, surf, pos, groups):
         super().__init__(groups)
-        self.image = LASER
-        self.rect = self.image.get_frect(midbottom = (player.rect.centerx, player.rect.top))
+        self.image = surf
+        self.rect = self.image.get_frect(midbottom = pos)
         
-    def update(self):
-        if pygame.key.get_just_pressed()[pygame.K_SPACE]:
-            pass
+    def update(self, dt):
+        self.rect.centery -= 750 *dt
+        if self.rect.bottom < 0:
+            self.kill()

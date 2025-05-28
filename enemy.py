@@ -7,30 +7,31 @@ from constants import *
 path_to_enemies = os.path.join("assets", "enemies")
 
 enemies = [enemy for enemy in os.listdir(path_to_enemies)]
-enemy_spawn_x = random.randint(0, SCREEN_WIDTH)
 
 
-class Enemy():
-    def __init__(self):
+
+class Enemy(pygame.sprite.Sprite):
+    def __init__(self, groups):
+        super().__init__(groups)
         self.sprite_choice = os.path.join(path_to_enemies, random.choice(enemies))
-        self.sprite = pygame.image.load(self.sprite_choice).convert_alpha()
-        self.frect = self.sprite.get_frect(midtop = (enemy_spawn_x, 0))
-
-    def draw(self, surface):
-        surface.blit(self.sprite, self.frect)
+        self.spawn_x = random.randint(0, SCREEN_WIDTH)
+        self.image = pygame.image.load(self.sprite_choice).convert_alpha()
+        self.rect = self.image.get_frect(midtop = (self.spawn_x, 0))
         
     
     def update(self, dt):
         
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship1.png"):
-            self.frect.y += ENEMY_SPEED * dt * 1
+            self.rect.y += ENEMY_SPEED * dt * 1
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship2.png"):
-            self.frect.y += ENEMY_SPEED * dt * 2
+            self.rect.y += ENEMY_SPEED * dt * 2
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship3.png"):
-            self.frect.y += ENEMY_SPEED * dt * 1.5
+            self.rect.y += ENEMY_SPEED * dt * 1.5
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship4.png"):
-            self.frect.y += ENEMY_SPEED * dt * 2.5
+            self.rect.y += ENEMY_SPEED * dt * 2.5
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship5.png"):
-            self.frect.y += ENEMY_SPEED * dt * 5
+            self.rect.y += ENEMY_SPEED * dt * 5
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship6.png"):
-            self.frect.y += ENEMY_SPEED * dt * 1.75
+            self.rect.y += ENEMY_SPEED * dt * 1.75
+        if self.rect.top > SCREEN_HEIGHT:
+            self.kill()

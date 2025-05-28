@@ -2,6 +2,7 @@ import pygame
 import os
 from constants import *
 import time
+from laser import Laser
 
 
 
@@ -12,17 +13,31 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_frect(midbottom=(SCREEN_WIDTH/2, SCREEN_HEIGHT))
         self.pos = pygame.math.Vector2(self.rect.x, self.rect.y)
         self.direction = pygame.math.Vector2(0,0)
+
+        #cooldown for weapon
+        self.can_shoot = True
+        self.laser_schoot = 0
+        self.cooldown_duration = 350
             
-    
+    def laser_timer(self):
+        if not self.can_shoot:
+            current_time = pygame.time.get_ticks()
+            if (current_time - self.laser_shoot_time) >= self.cooldown_duration:
+                self.can_shoot = True
+
     def update(self, dt):
         keys = pygame.key.get_pressed()
 
         self.direction.x = int(keys[pygame.K_RIGHT] - int(keys[pygame.K_LEFT]))
         self.direction.y = int(keys[pygame.K_DOWN] - int(keys[pygame.K_UP]))
-        
-        if pygame.key.get_just_pressed()[pygame.K_SPACE]:
-            self.shoot(LASER)
-            print("shoot")
+
+        recent_pressed_key = pygame.key.get_just_pressed()
+        if recent_pressed_key[pygame.K_SPACE] and self.can_shoot: 
+            Laser(LASER, self.rect.midtop, ALL_SPRITES)
+
+
+            self.can_shoot = False
+            self.laser_shoot_time = pygame.time.get_ticks()
         
         if self.direction.length_squared() != 0:
             self.direction = self.direction.normalize()
@@ -30,9 +45,7 @@ class Player(pygame.sprite.Sprite):
         self.pos += self.direction * PLAYER_SPEED * dt
         self.rect.topleft = self.pos
 
+        self.laser_timer()
 
-    def shoot(self, surf):
-        self.laser = surf
-        self.laser_frect = self.laser.get_frect(midbottom = (self.rect.centerx, self.rect.top))
-        
-        SCREEN.blit(self.laser, self.laser_frect)
+
+
