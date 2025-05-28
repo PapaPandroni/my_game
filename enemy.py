@@ -17,21 +17,22 @@ class Enemy(pygame.sprite.Sprite):
         self.spawn_x = random.randint(0, SCREEN_WIDTH)
         self.image = pygame.image.load(self.sprite_choice).convert_alpha()
         self.rect = self.image.get_frect(midtop = (self.spawn_x, 0))
+        self.direction = pygame.math.Vector2(random.uniform(-0.6, 0.6), 1)
         
     
     def update(self, dt):
         
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship1.png"):
-            self.rect.y += ENEMY_SPEED * dt * 1
+            self.rect.center += ENEMY_SPEED * dt * 1 * self.direction
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship2.png"):
-            self.rect.y += ENEMY_SPEED * dt * 2
+            self.rect.center += ENEMY_SPEED * dt * 2 * self.direction
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship3.png"):
-            self.rect.y += ENEMY_SPEED * dt * 1.5
+            self.rect.center += ENEMY_SPEED * dt * 1.5 * self.direction
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship4.png"):
-            self.rect.y += ENEMY_SPEED * dt * 2.5
+            self.rect.center += ENEMY_SPEED * dt * 2.5 * self.direction
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship5.png"):
-            self.rect.y += ENEMY_SPEED * dt * 5
+            self.rect.center += ENEMY_SPEED * dt * 5 * self.direction
         if self.sprite_choice == os.path.join("assets", "enemies", "Ship6.png"):
-            self.rect.y += ENEMY_SPEED * dt * 1.75
+            self.rect.center += ENEMY_SPEED * dt * 1.75 * self.direction
         if self.rect.top > SCREEN_HEIGHT:
             self.kill()
