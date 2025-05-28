@@ -12,3 +12,4 @@ class Laser(pygame.sprite.Sprite):
         self.rect.centery -= 750 *dt
         if self.rect.bottom < 0:
             self.kill()
+            

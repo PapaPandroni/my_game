@@ -4,6 +4,7 @@ from player import Player
 from enemy import Enemy
 from constants import *
 from laser import Laser
+from alien import Alien
 
 pygame.init()
 
@@ -18,6 +19,9 @@ player = Player(ALL_SPRITES)
 enemy_spawn = pygame.event.custom_type()
 pygame.time.set_timer(enemy_spawn, 500)
 
+alien_spawn = pygame.event.custom_type()
+pygame.time.set_timer(alien_spawn, 5000)
+
 running = True
 while running:
     
@@ -28,6 +32,8 @@ while running:
             running = False
         if event.type == enemy_spawn:
             enemy = Enemy(ALL_SPRITES)
+        if event.type == alien_spawn:
+            alien = Alien(ALL_SPRITES)
 
 
 
