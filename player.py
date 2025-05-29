@@ -37,6 +37,7 @@ class Player(pygame.sprite.Sprite):
             Laser(LASER, self.rect.midtop, (ALL_SPRITES, LASER_SPRITES))
             self.can_shoot = False
             self.laser_shoot_time = pygame.time.get_ticks()
+            laser_sound.play()
         
         if self.direction.length_squared() != 0:
             self.direction = self.direction.normalize()

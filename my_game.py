@@ -7,6 +7,7 @@ from laser import Laser
 from alien import Alien
 
 pygame.init()
+pygame.mixer.init()
 
 clock = pygame.time.Clock()
 
@@ -26,6 +27,13 @@ pygame.time.set_timer(enemy_spawn, 500)
 
 alien_spawn = pygame.event.custom_type()
 pygame.time.set_timer(alien_spawn, 5000)
+
+
+#Sounds
+pygame.mixer.music.load(os.path.join("assets", "space-120280.mp3"))
+pygame.mixer.music.play(loops=-1)
+
+
 
 def collisions():
     global points

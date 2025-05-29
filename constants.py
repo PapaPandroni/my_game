@@ -1,7 +1,7 @@
 import pygame
 import os
 
-
+pygame.mixer.init()
 
 SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
 
@@ -22,3 +22,7 @@ ENEMY_SPRITES_GRP = pygame.sprite.Group()
 LASER_SPRITES = pygame.sprite.Group()
 ALIEN_SPRITES_GRP = pygame.sprite.Group()
 HERO = pygame.sprite.Group()
+
+
+laser_sound = pygame.mixer.Sound(os.path.join("assets", "laser-312360.mp3"))
+laser_sound.set_volume(0.1)
