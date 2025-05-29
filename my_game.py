@@ -51,6 +51,7 @@ def collisions():
 
     alien_saved = pygame.sprite.spritecollide(player, ALIEN_SPRITES_GRP, True, pygame.sprite.collide_mask)
     if alien_saved:
+        cute_alien.play()
         points += 1
         
 def display_points(points):
