@@ -5,6 +5,7 @@ from enemy import Enemy
 from constants import *
 from laser import Laser
 from alien import Alien
+from explosion import Explosion
 
 pygame.init()
 pygame.mixer.init()
@@ -39,11 +40,13 @@ def collisions():
     global points
     player_death = pygame.sprite.spritecollide(player, ENEMY_SPRITES_GRP, False, pygame.sprite.collide_mask)
     if player_death:
+        Explosion(EXPLOSION_SPRITES, player.rect.center, ALL_SPRITES)
         player.kill()
 
     for laser in LASER_SPRITES:
         laser_hits = pygame.sprite.spritecollide(laser, ENEMY_SPRITES_GRP, True, pygame.sprite.collide_mask)    
         if laser_hits:
+            Explosion(EXPLOSION_SPRITES, laser.rect.midtop, ALL_SPRITES)
             laser.kill()
 
     alien_saved = pygame.sprite.spritecollide(player, ALIEN_SPRITES_GRP, True, pygame.sprite.collide_mask)

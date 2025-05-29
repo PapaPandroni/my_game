@@ -23,6 +23,11 @@ LASER_SPRITES = pygame.sprite.Group()
 ALIEN_SPRITES_GRP = pygame.sprite.Group()
 HERO = pygame.sprite.Group()
 
+explosion_path = os.path.join("assets", "explosion")
+explosion_name = os.listdir(explosion_path)
+EXPLOSION_SPRITES = [pygame.image.load(os.path.join(explosion_path, name)).convert_alpha() for name in explosion_name]
+
+
 
 laser_sound = pygame.mixer.Sound(os.path.join("assets", "laser-312360.mp3"))
 laser_sound.set_volume(0.1)
