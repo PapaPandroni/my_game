@@ -13,6 +13,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_frect(midbottom=(SCREEN_WIDTH/2, SCREEN_HEIGHT))
         self.pos = pygame.math.Vector2(self.rect.x, self.rect.y)
         self.direction = pygame.math.Vector2(0,0)
+        self.mask = pygame.mask.from_surface(self.image)
 
         #cooldown for weapon
         self.can_shoot = True
@@ -27,7 +28,7 @@ class Player(pygame.sprite.Sprite):
 
     def update(self, dt):
         keys = pygame.key.get_pressed()
-
+        
         self.direction.x = int(keys[pygame.K_RIGHT] - int(keys[pygame.K_LEFT]))
         self.direction.y = int(keys[pygame.K_DOWN] - int(keys[pygame.K_UP]))
 
@@ -42,6 +43,9 @@ class Player(pygame.sprite.Sprite):
 
         self.pos += self.direction * PLAYER_SPEED * dt
         self.rect.topleft = self.pos
+
+        self.rect.clamp_ip(pygame.Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.pos = pygame.math.Vector2(self.rect.topleft)
 
         self.laser_timer()
 

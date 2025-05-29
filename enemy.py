@@ -18,6 +18,7 @@ class Enemy(pygame.sprite.Sprite):
         self.image = pygame.image.load(self.sprite_choice).convert_alpha()
         self.rect = self.image.get_frect(midtop = (self.spawn_x, 0))
         self.direction = pygame.math.Vector2(random.uniform(-0.6, 0.6), 1)
+        self.mask = pygame.mask.from_surface(self.image)
         
     
     def update(self, dt):

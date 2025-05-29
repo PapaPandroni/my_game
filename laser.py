@@ -7,7 +7,8 @@ class Laser(pygame.sprite.Sprite):
         super().__init__(groups)
         self.image = surf
         self.rect = self.image.get_frect(midbottom = pos)
-        
+        self.mask = pygame.mask.from_surface(self.image)
+
     def update(self, dt):
         self.rect.centery -= 750 *dt
         if self.rect.bottom < 0:

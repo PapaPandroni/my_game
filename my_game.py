@@ -29,16 +29,16 @@ pygame.time.set_timer(alien_spawn, 5000)
 
 def collisions():
     global points
-    player_death = pygame.sprite.spritecollide(player, ENEMY_SPRITES_GRP, False)
+    player_death = pygame.sprite.spritecollide(player, ENEMY_SPRITES_GRP, False, pygame.sprite.collide_mask)
     if player_death:
         player.kill()
 
     for laser in LASER_SPRITES:
-        laser_hits = pygame.sprite.spritecollide(laser, ENEMY_SPRITES_GRP, True)    
+        laser_hits = pygame.sprite.spritecollide(laser, ENEMY_SPRITES_GRP, True, pygame.sprite.collide_mask)    
         if laser_hits:
             laser.kill()
 
-    alien_saved = pygame.sprite.spritecollide(player, ALIEN_SPRITES_GRP, True)
+    alien_saved = pygame.sprite.spritecollide(player, ALIEN_SPRITES_GRP, True, pygame.sprite.collide_mask)
     if alien_saved:
         points += 1
         
@@ -46,7 +46,7 @@ def display_points(points):
     text_surface = font.render(f"{points}", True, "#ced3d4")
     text_rect = text_surface.get_frect(midtop = (SCREEN_WIDTH-100, 100))
     SCREEN.blit(text_surface, text_rect)
-    pygame.draw.rect(SCREEN, "lightblue", text_rect.inflate((25, 25)), 1, 10)
+    pygame.draw.rect(SCREEN, "lightblue", text_rect.inflate((25, 25)).move(-2, -2), 1, 10)
     
 
 points = 0
