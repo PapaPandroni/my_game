@@ -10,9 +10,14 @@ pygame.init()
 
 clock = pygame.time.Clock()
 
+
+pygame.display.set_caption("Alien Rescue")
 background = pygame.transform.scale(pygame.image.load(os.path.join("assets", "orig_big.png")).convert(), (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 player = Player((ALL_SPRITES, HERO))
+
+font = pygame.font.Font(os.path.join("assets", "neo_scifi.ttf"), 50)
+
 
 
 #enemey spawn event
@@ -23,6 +28,7 @@ alien_spawn = pygame.event.custom_type()
 pygame.time.set_timer(alien_spawn, 5000)
 
 def collisions():
+    global points
     player_death = pygame.sprite.spritecollide(player, ENEMY_SPRITES_GRP, False)
     if player_death:
         player.kill()
@@ -34,9 +40,14 @@ def collisions():
 
     alien_saved = pygame.sprite.spritecollide(player, ALIEN_SPRITES_GRP, True)
     if alien_saved:
-        print("POINT!")
+        points += 1
         
-
+def display_points(points):
+    text_surface = font.render(f"{points}", True, "#ced3d4")
+    text_rect = text_surface.get_frect(midtop = (SCREEN_WIDTH-100, 100))
+    SCREEN.blit(text_surface, text_rect)
+    pygame.draw.rect(SCREEN, "lightblue", text_rect.inflate((25, 25)), 1, 10)
+    
 
 points = 0
 
@@ -58,10 +69,12 @@ while running:
     ALL_SPRITES.update(dt)
     
     #GAME
-    collisions()
-
+    
     SCREEN.blit(background)
+    collisions()
+    display_points(points)
     ALL_SPRITES.draw(SCREEN)
+    
 
     pygame.display.flip()
 
