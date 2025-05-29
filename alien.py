@@ -6,7 +6,7 @@ class Alien(pygame.sprite.Sprite):
     def __init__(self, groups):
         super().__init__(groups)
         self.image = ALIEN_SPRITE
-        self.rect = self.image.get_frect(midbottom=(random.randint(0, SCREEN_WIDTH), random.randint(0, SCREEN_HEIGHT)))
+        self.rect = self.image.get_frect(midbottom=(random.randint(50, SCREEN_WIDTH-50), random.randint(50, SCREEN_HEIGHT-50)))
         self.duration = 3000
 
         self.spawntime = pygame.time.get_ticks()
